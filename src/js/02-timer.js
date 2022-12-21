@@ -39,17 +39,20 @@ function onStart() {
     timer = setInterval(() => {
         let currentTimeNew = new Date().getTime();
         const msTimer = inputTime - currentTimeNew;
-        const { days, hours, minutes, seconds } = convertMs(msTimer);
-        daysTimer.textContent = days;
-        hoursTimer.textContent = hours;
-        minutesTimer.textContent = minutes;
-        secondsTimer.textContent = seconds;
+        if (msTimer > 0) {  
+            const { days, hours, minutes, seconds } = convertMs(msTimer);
+            daysTimer.textContent = addLeadingZero(days);
+            hoursTimer.textContent = addLeadingZero(hours);
+            minutesTimer.textContent = addLeadingZero(minutes);
+            secondsTimer.textContent = addLeadingZero(seconds);
+        } 
+        else clearInterval();
     }, 1000);
 }
 
-
-
-
+function addLeadingZero(value) {
+    return String(value).padStart(2, '0');
+}
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
